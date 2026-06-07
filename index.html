@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Premium Live Test</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: #eef2f5; 
+            color: #333;
+            padding: 20px; 
+            margin: 0;
+        }
+        .container { 
+            background: white; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 30px; 
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1); 
+            border-top: 8px solid #1a5276; 
+            border-radius: 8px;
+        }
+        .header { text-align: center; border-bottom: 2px solid #1a5276; padding-bottom: 15px; margin-bottom: 25px; }
+        .header h1 { margin: 0; color: #1a5276; font-size: 26px; }
+        .header h2 { margin: 5px 0 0; color: #555; font-size: 16px; }
+        .instructions { background: #fef9e7; padding: 15px; border-left: 5px solid #f39c12; font-size: 14px; margin-bottom: 25px; border-radius: 4px; }
+        .section-title { background: #1a5276; color: white; padding: 10px 15px; font-size: 16px; font-weight: bold; margin: 30px 0 15px 0; border-radius: 4px; }
+        .question-block { margin-bottom: 20px; padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; }
+        .question-text { font-weight: 600; color: #1e293b; margin-bottom: 12px; font-size: 15px; }
+        .options { display: flex; flex-direction: column; gap: 8px; }
+        .option-label { display: flex; align-items: center; padding: 8px 12px; background: white; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; transition: 0.2s; font-size: 14px; }
+        .option-label:hover { background: #f1f5f9; }
+        .option-label input { margin-right: 10px; cursor: pointer; }
+        
+        /* Result Highlights */
+        .correct-answer { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724 !important; font-weight: bold; }
+        .wrong-answer { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24 !important; text-decoration: line-through; }
+        
+        .submit-btn { display: block; width: 100%; padding: 15px; background: #1a5276; color: white; border: none; font-size: 18px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 30px; transition: 0.3s; }
+        .submit-btn:hover { background: #154360; }
+        
+        #result-box { display: none; background: #d4edda; color: #155724; border: 2px solid #28a745; padding: 20px; margin-top: 30px; text-align: center; border-radius: 8px; font-size: 22px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>12th - LIVE EXAM PORTAL</h1>
+        <h3>The earth  Online Test (50 Questions)</h3>
+<h2 style="font-size:10px; color:#888; font-weight:normal;">
+    यह test sangam (in id-@sangam__zero) द्वारा बनाया गया है। यदि आप भी अपने लिए इसी प्रकार का online test बनवाना चाहते हैं, तो 9241967602 पर Message कर सकते हैं।</h2>
+    </div>
+
+    <div class="instructions">
+        <strong>निर्देश:</strong> सभी प्रश्नों के उत्तर दें। प्रत्येक प्रश्न के 4 विकल्प हैं। परीक्षण पूरा करने के बाद <strong>"Submit Test"</strong> पर क्लिक करें ताकि आप अपना स्कोर और सही उत्तर देख सकें।
+    </div>
+
+    <form id="quizForm">
+        
+        <!-- SECTION 01 -->
+        <div class="section-title">SECTION 01. </div>
+        
+        <script>
+            // All 50 Questions Data (Generated Dynamically for clean code)
+           const questions = [
+                // SECTION - The Earth (Based on H.E. Bates)
+                { q: "1. His hens were producing an average of –", opt: ["three hundred eggs", "two hundred eggs", "one hundred eggs", "None of these"], ans: 1 },
+                { q: "2. Benjy's father was –", opt: ["a doctor", "a teacher", "a preacher", "a painter"], ans: 2 },
+                { q: "3. Benjy's father valued…", opt: ["sweat", "fate", "both", "None of these"], ans: 1 },
+                { q: "4. Benjy's parents planned for a ceremony when he was", opt: ["thirty", "twenty-five", "twenty-one", "fifteen"], ans: 2 },
+                { q: "5. H.E. Bates was born in—", opt: ["1906", "1905", "1915", "1925"], ans: 1 },
+                { q: "6. H.E. Bates died in–", opt: ["1974", "1984", "1964", "1954"], ans: 0 },
+                { q: "7. H.E. Bates' first novel was published when he was only –", opt: ["20 years old", "21 years old", "25 years old", "30 years old"], ans: 1 },
+                { q: "8. The name of Johnsons' son was", opt: ["Jack", "Tom", "Benjy", "Tony"], ans: 2 },
+                { q: "9. The Johnsons' son was-", opt: ["insane", "blind", "lame", "simple"], ans: 3 },
+                { q: "10. The doctor advised the parents to give to Benjy—", opt: ["medicine", "toys", "some work", "None of these"], ans: 2 },
+                { q: "11. The doctor suggested to let him keep", opt: ["cows", "hens", "horses", "None of these"], ans: 1 },
+                { q: "12. At first Benjy kept-", opt: ["ten or a dozen hens", "two dozen hens", "four dozen hens", "None of these"], ans: 0 },
+                { q: "13. Benjy left the school at-", opt: ["twenty", "twelve", "fourteen", "None of these"], ans: 2 },
+                { q: "14. When he left the school he had", opt: ["forty or fifty hens", "thirty or forty hens", "sixty or seventy hens", "None of these"], ans: 0 },
+                { q: "15. 'The Earth' has been written by –", opt: ["Germaine Greer", "H.E. Bates", "Anton Chekhov", "Shiga Naoya"], ans: 1 },
+                { q: "16. H.E. Bates has written the story-", opt: ["A Pinch of Snuff", "The Artist", "The Earth", "None of these"], ans: 2 },
+                { q: "17. Benjy's parents did not like ……….. because of grey.", opt: ["Rekha", "Shikha", "Mary", "Florence"], ans: 3 },
+                { q: "18. Benjy purchased land from –", opt: ["Sanders", "Meanders", "Randers", "None of these"], ans: 0 },
+                { q: "19. Florence later on became the wife of –", opt: ["Benjy's friend", "Benjy", "Ranjay", "None of these"], ans: 1 },
+                { q: "20. Benjy was the son of –", opt: ["Robinsons", "Stevensons", "Rocksons", "Johnsons"], ans: 3 },
+                { q: "21. …………. Was the real owner of the land.", opt: ["Landers", "Manders", "Sanders", "Randers"], ans: 2 },
+                { q: "22. Benjy wanted to marry", opt: ["Clorence", "Florence", "Rupani", "None of these"], ans: 1 },
+                { q: "23. Johnson was a poor", opt: ["farmer", "teacher", "doctor", "trader"], ans: 2 },
+                { q: "24. Benjy's parents gave him a passbook when he was ………. years old.", opt: ["20", "21", "22", "23"], ans: 1 },
+                { q: "25. Johnson was in the possession of ………… land.", opt: ["two acre", "three acre", "four acre", "five acre"], ans: 2 },
+                { q: "26. Benjy should be allowed to keep", opt: ["Hens", "Dogs", "Cows", "Cats"], ans: 0 },
+                { q: "27. The ………….. suggested that Benjy should be allowed to keep hens.", opt: ["teacher", "doctor", "friend", "saint"], ans: 1 },
+                { q: "28. 'The Earth' is a –", opt: ["poem", "essay", "drama", "story"], ans: 3 },
+                { q: "29. Benjy told his parents to eat in the –", opt: ["drawing room", "bathroom", "bedroom", "kitchen"], ans: 2 },
+                { q: "30. Benjy left his ……….. on the pavement.", opt: ["brother", "parents", "sister", "wife"], ans: 1 },
+                { q: "31. ……………… drives his parents from their house.", opt: ["Johnson", "Benjy", "Sanders", "Florence"], ans: 1 },
+                { q: "32. For many years Benjy's father had been a local", opt: ["doctor", "teacher", "preacher", "farmer"], ans: 2 },
+                { q: "33. Johnson rented land from —", opt: ["Sanders", "Randers", "Panders", "Landers"], ans: 0 },
+                { q: "34. Benjy moved into the house with ………. as his wife at the age of 40.", opt: ["Clorence", "Florence", "Victoria", "None of these"], ans: 1 }
+            ];
+            // Render Questions
+            questions.forEach((item, index) => {
+                if(index === 10) document.write('<div class="section-title">SECTION 02. </div>');
+                if(index === 20) document.write('<div class="section-title">SECTION 03. </div>');
+                if(index === 30) document.write('<div class="section-title">SECTION 04. </div>');
+                if(index === 40) document.write('<div class="section-title">SECTION 05. </div>');
+
+                let optionsHTML = '';
+                item.opt.forEach((option, i) => {
+                    optionsHTML += `
+                        <label class="option-label" id="label-q${index}-opt${i}">
+                            <input type="radio" name="q${index}" value="${i}">
+                            ${String.fromCharCode(97 + i)}) ${option}
+                        </label>`;
+                });
+
+                document.write(`
+                    <div class="question-block" id="qBlock${index}">
+                        <div class="question-text">${item.q}</div>
+                        <div class="options">${optionsHTML}</div>
+                    </div>
+                `);
+            });
+        </script>
+
+        <button type="button" class="submit-btn" onclick="calculateScore()">Submit Test & Check Result</button>
+    </form>
+
+    <div id="result-box"></div>
+
+</div>
+
+<script>
+    function calculateScore() {
+        let score = 0;
+        let total = questions.length;
+
+        questions.forEach((item, index) => {
+            // Get selected option
+            let selected = document.querySelector(`input[name="q${index}"]:checked`);
+            let correctValue = item.ans;
+            
+            // Highlight correct answer permanently
+            let correctLabel = document.getElementById(`label-q${index}-opt${correctValue}`);
+            correctLabel.classList.add("correct-answer");
+
+            if (selected) {
+                let selectedValue = parseInt(selected.value);
+                if (selectedValue === correctValue) {
+                    score++;
+                } else {
+                    // Highlight wrong answer if user selected it
+                    let wrongLabel = document.getElementById(`label-q${index}-opt${selectedValue}`);
+                    wrongLabel.classList.add("wrong-answer");
+                }
+            }
+        });
+
+        // Show Score
+        let resultBox = document.getElementById('result-box');
+        resultBox.style.display = "block";
+        
+        let percentage = (score / total) * 100;
+        let message = "";
+        
+        if(percentage >= 80) message = "उत्कृष्ट प्रदर्शन! 🌟";
+        else if(percentage >= 50) message = "अच्छा प्रयास, थोड़ी और मेहनत करें! 👍";
+        else message = "आपको और अभ्यास की आवश्यकता है! 📚";
+
+        resultBox.innerHTML = `आपका स्कोर: ${score} / ${total} <br><span style="font-size:18px; color:#333;">${message}</span>`;
+        
+        // Scroll to result
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
